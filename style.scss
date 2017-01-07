@@ -1,0 +1,116 @@
+$background-color: #fb5;
+$dark-background: #222;
+$light-color: #eee;
+$dark-color: #333;
+$font-stack: 'VT323', monospace, serif, sans-serif;
+
+@mixin transition($property, $duration, $animation){
+  -webkit-transition: $property $duration, $animation;
+          transition: $property $duration, $animation;
+}
+
+@mixin center(){
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+*{box-sizing: border-box; padding: 0; margin: 0; @include transition(all, 0.3s, ease-in-out);}
+
+body{font-size: 16px; font-family: $font-stack}
+
+nav{
+  background-color: $dark-background;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100vh;
+  
+    ul{
+     text-align: center;
+     margin: 5em auto;
+     list-style-type: none;
+      
+      li{
+       border-bottom: 0.0625em solid #111;
+        
+        a{
+         margin: 0.625em auto;
+         display: inline-block;
+         padding: 1em;
+         text-decoration: none;
+         color: $light-color;
+         width: 50%;
+         letter-spacing: 0.0625em;
+         font-size: 1.3rem;
+        }
+      }
+    }
+  
+  &.visible{
+    right: 0;
+    
+    span:nth-child(1){
+      @include transition(all, 0.1s, ease-out);
+      transform: rotate(-45deg);
+      top: 8px;
+    }
+    
+    span:nth-child(2){
+      opacity: 0;
+      @include transition(all, 0.01s, ease-out);
+    }
+    
+    span:nth-child(3){
+      top: -8px;
+      transform: rotate(45deg);
+      @include transition(all, 0.1s, ease-out);
+    }
+ }
+  
+ .toggle-icon{
+  position: absolute;
+  top: 0;
+  left: -60px;
+  width: 25px;
+  height: 20px;
+  margin: 20px;
+  cursor: pointer;
+  
+  span{
+  display: block;
+  background-color: $dark-background;
+  height: 3px;
+  margin-bottom: 5px;
+  position: relative;
+  }
+ }
+}
+
+.container{
+  width: 100%;
+  height: 100vh;
+  background-color: $background-color;
+  
+  .content{
+    width: 100%;
+    height: 100vh;
+    
+    div{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: $background-color;
+    
+    h1{
+      position: absolute;
+      @include center;
+      color: $dark-color - 30;
+      font-size: 2rem;
+    }
+   }
+  }
+}
